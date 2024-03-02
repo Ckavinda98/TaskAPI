@@ -14,5 +14,23 @@ namespace TaskAPI.Controllers
             var tasks = new string[] { "Task 1", "Task 2", "Task 3" };
             return Ok(tasks);
         }
+
+        [HttpPost]
+        public IActionResult Add()
+        {
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateTask()
+        {
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteTask()
+        {
+            return Ok();
+        }
     }
 }
