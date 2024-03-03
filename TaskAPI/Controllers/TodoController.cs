@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
-using TaskAPI.Models;
 using TaskAPI.Service;
 
 namespace TaskAPI.Controllers
@@ -11,10 +10,10 @@ namespace TaskAPI.Controllers
     [ApiController]
     public class TodoController : ControllerBase
     {
-        private TodoService _todoService;
-        public TodoController()
+        private ITodoRepository _todoService;
+        public TodoController(ITodoRepository repository)
         {
-            _todoService = new TodoService();
+            _todoService = repository;
         }
         [HttpGet("{id?}")]
        public IActionResult GetToDo(int? id)
