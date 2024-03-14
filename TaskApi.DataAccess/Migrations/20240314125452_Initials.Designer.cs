@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskApi.DataAccess;
 
@@ -11,9 +12,11 @@ using TaskApi.DataAccess;
 namespace TaskApi.DataAccess.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    partial class TodoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240314125452_Initials")]
+    partial class Initials
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,17 +53,6 @@ namespace TaskApi.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Todos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Created = new DateTime(2024, 3, 15, 3, 3, 1, 989, DateTimeKind.Local).AddTicks(4510),
-                            Description = "Test",
-                            Deu = new DateTime(2024, 3, 20, 3, 3, 1, 989, DateTimeKind.Local).AddTicks(4527),
-                            Status = 0,
-                            Title = "Example 1 - DB"
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -16,7 +16,7 @@ namespace TaskAPI.Controllers
             _todoService = repository;
         }
         [HttpGet("{id?}")]
-       public IActionResult GetToDo(int? id)
+       public IActionResult GetToDos(int? id)
           
         {
             var mytodos = _todoService.AllToDos();
