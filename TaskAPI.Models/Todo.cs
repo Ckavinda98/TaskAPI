@@ -8,6 +8,8 @@
         public DateTime Created { set; get; }
         public DateTime Deu { set; get; }
         public TodoStatus Status { get; set; }
+        public int AurthorId {  get; set; }
+        public Aurthor Aurthor { get; set; }
 
     }
 }

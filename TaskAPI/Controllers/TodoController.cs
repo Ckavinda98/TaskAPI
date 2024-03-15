@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
-using TaskAPI.Service;
+using TaskAPI.Service.Todos;
 
 namespace TaskAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/todos")]
     [ApiController]
     public class TodoController : ControllerBase
     {
@@ -15,16 +15,27 @@ namespace TaskAPI.Controllers
         {
             _todoService = repository;
         }
-        [HttpGet("{id?}")]
-       public IActionResult GetToDos(int? id)
+
+        [HttpGet]
+       public IActionResult GetToDos()
           
         {
             var mytodos = _todoService.AllToDos();
-            if (id is null) return Ok(mytodos);
-            mytodos = mytodos.Where(t => t.Id == id).ToList();
 
             return Ok(mytodos);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetTodo(int id)
+        {
+            var todo = _todoService.GetTodo(id);
+                if (todo is null)
+            {
+                return NotFound();
+            }
+                return Ok(todo);
+        }
+
 
         
     }

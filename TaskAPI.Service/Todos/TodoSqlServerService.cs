@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TaskAPI.Models;
 using TaskApi.DataAccess;
 
-namespace TaskAPI.Service
+namespace TaskAPI.Service.Todos
 {
     public class TodoSqlServerService : ITodoRepository
     {
@@ -14,6 +14,11 @@ namespace TaskAPI.Service
         public List<Todo> AllToDos()
         {
             return _context.Todos.ToList();
+        }
+
+        public Todo GetTodo(int id)
+        {
+            return _context.Todos.Find(id);
         }
     }
 }

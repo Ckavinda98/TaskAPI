@@ -1,14 +1,19 @@
-using TaskAPI.Service;
+using TaskAPI.Service.Authors;
+using TaskAPI.Service.Todos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => 
+{
+    options.ReturnHttpNotAcceptable = false;
+}).AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITodoRepository, TodoSqlServerService>();
+builder.Services.AddScoped<IAuthorRepository, AuthorSqlServerService>();
 
 var app = builder.Build();
 

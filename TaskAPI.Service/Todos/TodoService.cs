@@ -1,6 +1,6 @@
 ﻿using TaskAPI.Models;
 
-namespace TaskAPI.Service
+namespace TaskAPI.Service.Todos
 {
     public class TodoService : ITodoRepository
     {
@@ -48,6 +48,11 @@ namespace TaskAPI.Service
 
             return todos;
 
+        }
+
+        public Todo GetTodo(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

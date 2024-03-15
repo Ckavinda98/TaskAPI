@@ -10,7 +10,9 @@ namespace TaskApi.DataAccess
 {
     public class TodoDbContext : DbContext
     {
+        public DbSet<Aurthor> Aurthors { get; set; }
         public DbSet<Todo> Todos { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,14 +22,41 @@ namespace TaskApi.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Todo>().HasData(new Todo
+            modelBuilder.Entity<Aurthor>().HasData(new Aurthor[]
             {
-                Id = 1,
+               new Aurthor { Id= 1, FullName="Malith Fernandol" },
+               new Aurthor { Id= 2, FullName="Kevin Aravinda" },
+               new Aurthor { Id= 3, FullName="Dilina Supun" }
+            });
+
+            modelBuilder.Entity<Todo>().HasData(new Todo[]
+            {
+               new Todo { Id = 1,
                 Title = "Example 1 - DB",
                 Description = "Test",
                 Created = DateTime.Now,
                 Deu = DateTime.Now.AddDays(5),
-                Status = TodoStatus.New
+                Status = TodoStatus.New,
+                AurthorId = 1
+                },
+
+               new Todo { Id = 2,
+                Title = "Example 2 - DB",
+                Description = "Test",
+                Created = DateTime.Now,
+                Deu = DateTime.Now.AddDays(5),
+                Status = TodoStatus.New,
+                AurthorId = 3
+                },
+
+               new Todo { Id = 3,
+                Title = "Example 3 - DB",
+                Description = "Test",
+                Created = DateTime.Now,
+                Deu = DateTime.Now.AddDays(5),
+                Status = TodoStatus.New,
+                AurthorId = 2
+                },
 
             });
         }
