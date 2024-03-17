@@ -1,25 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TaskAPI.Models;
 
-namespace TaskAPI.Models
+namespace TaskAPI.Service.Models
 {
-    public class Todo
+    public class TodoDto
     {
         public int Id { get; set; }
-        [Required]
-        [MaxLength(150)]
-        public string Title { get; set; }
-       
-        [MaxLength(300)]
-        public string Description { get; set; }
-        [Required]
-        public DateTime Created { set; get; }
-        [Required]
-        public DateTime Deu { set; get; }
-        [Required]
-      
-        public TodoStatus Status { get; set; }
-        public int AurthorId {  get; set; }
-        public Aurthor Aurthor { get; set; }
 
+        public string Title { get; set; }
+
+
+        public string Description { get; set; }
+
+        public DateTime Created { set; get; }
+
+        public DateTime Deu { set; get; }
+
+
+        public TodoStatus Status { get; set; }
+        public int AurthorId { get; set; }
+        public Aurthor Aurthor { get; set; }
     }
 }

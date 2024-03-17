@@ -1,5 +1,8 @@
 using TaskAPI.Service.Authors;
 using TaskAPI.Service.Todos;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using TaskAPI.Service.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITodoRepository, TodoSqlServerService>();
 builder.Services.AddScoped<IAuthorRepository, AuthorSqlServerService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -23,6 +27,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("There was a Server Error. Please contact the developer.");
+        });
+    });
+}
+
 
 app.UseHttpsRedirection();
 
@@ -31,3 +47,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+

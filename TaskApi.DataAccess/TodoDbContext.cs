@@ -24,9 +24,10 @@ namespace TaskApi.DataAccess
         {
             modelBuilder.Entity<Aurthor>().HasData(new Aurthor[]
             {
-               new Aurthor { Id= 1, FullName="Malith Fernandol" },
-               new Aurthor { Id= 2, FullName="Kevin Aravinda" },
-               new Aurthor { Id= 3, FullName="Dilina Supun" }
+              new Aurthor { Id= 1, FullName="Malith Fernandol", AddressNo="45", Street="Flower Road", City="Colombo" },
+              new Aurthor { Id= 2, FullName="Kevin Aravinda", AddressNo="10", Street="Smaagi Road", City="Kaluthara"},
+              new Aurthor { Id= 3, FullName="Dilina Supun", AddressNo="67", Street="Fifth lane", City="Gampaha"}
+
             });
 
             modelBuilder.Entity<Todo>().HasData(new Todo[]
