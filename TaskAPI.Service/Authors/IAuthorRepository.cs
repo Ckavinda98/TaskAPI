@@ -10,6 +10,7 @@ namespace TaskAPI.Service.Authors
     public interface IAuthorRepository
     {
         public List<Aurthor> GetAllAuthors();
+        public List<Aurthor> GetAllAuthors(string job, string search);
 
         public Aurthor GetAuthor(int id);
     }
