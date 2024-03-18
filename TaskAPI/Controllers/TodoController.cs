@@ -57,6 +57,34 @@ namespace TaskAPI.Controllers
 
         }
 
+        [HttpPut("{todoid}")]
+        public ActionResult UpdateTodo(int authorId, int todoId, UpdateTodoDto todo)
+        {
+            var updatingTodo = _todoService.GetTodo(authorId, todoId);
+
+            if(updatingTodo is null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(todo, updatingTodo);
+            _todoService.UpdateTodo(updatingTodo);
+            return NoContent(); 
+        }
+
+        [HttpDelete("{todoid}")]
+        public ActionResult DeleteTodo(int authorid, int todoid)
+        {
+            var deletingTodo = _todoService.GetTodo(authorid, todoid);
+
+            if (deletingTodo is null)
+            {
+                return NotFound();
+            }
+
+            _todoService.DeleteTodo(deletingTodo);
+            return NoContent();
+        }
         
     }
 }
