@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
+using TaskAPI.Models;
 using TaskAPI.Service.Models;
 using TaskAPI.Service.Todos;
 
@@ -31,7 +32,7 @@ namespace TaskAPI.Controllers
             return Ok(mappedTodos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTodo")]
         public IActionResult GetTodo(int authorId, int id)
         {
             var todo = _todoService.GetTodo(authorId, id);
@@ -44,6 +45,17 @@ namespace TaskAPI.Controllers
                 return Ok(mappedTodo);
         }
 
+        [HttpPost]
+        public ActionResult<TodoDto> CreateToDo(int authorId, CreateTodoDto todo)
+        {
+            var todoEntity = _mapper.Map<Todo>(todo);
+            var newTodo = _todoService.AddTodo(authorId, todoEntity);
+            var todoForReturn = _mapper.Map<TodoDto>(newTodo);
+
+            return CreatedAtRoute("GetTodo", new { authorId = authorId, id = todoForReturn.Id },
+                todoForReturn);
+
+        }
 
         
     }
